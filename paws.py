@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+"""Flask Application for Paws Rescue Center."""
+from flask import Flask, render_template, abort
 app = Flask(__name__)
 
 """Information regarding the Pets in the System."""
@@ -11,12 +11,23 @@ pets = [
         ]
 
 @app.route("/")
-def home():
+def homepage():
+    """View function for Home Page."""
     return render_template("home.html", pets = pets)
+
 
 @app.route("/about")
 def about():
+    """View function for About Page."""
     return render_template("about.html")
 
+@app.route("/details/<int:pet_id>")
+def details(pet_id):
+    pet = next((pet for pet in pets if pet['id'] == pet_id), None)
+    if pet is None:
+        abort(404, "No pet was found with the given Id.")
+    return render_template("details.html", pet = pet)
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, host="0.0.0.0", port=3000)
