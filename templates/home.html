@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Paws Rescue Center</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+  <h1 id = "title"><center>Paws Rescue Center 🐾</center></h1>
+  <table>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Bio</th>
+    </tr>
+    {% for pet in pets%}
+    <tr>
+        <th><img src = "{{url_for('static', filename= pet.id|string + '.jpg')}}"></th>
+        <th>{{pet.name}}</th>
+        <th>{{pet.age}}</th>
+        <th>{{pet.bio}}</th>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='format.css')}}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="header"> JINJA DEMO </div>
+    <div id="content">
+        {% block content %}
+        <!-- Placeholder for Page Content -->
+        {% endblock %}
+    </div>
+    <div id="footer"> Copyright © 2019 All Rights Reserved </div>
+</body>
+</html>
