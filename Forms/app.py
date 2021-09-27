@@ -16,13 +16,15 @@ def home():
 @app.route("/login", methods = ["GET", "POST"])
 def login():
     form = LoginForm()
-    if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
-        
-        if email in users and users[email] == password:
-            return render_template("login.html", message = "Successfully Logged In") 
-        return render_template("login.html", message ="Incorrect Email or Password")       
+    if form.validate_on_submit():
+        for u_email, u_password in users.items():
+            if u_email == form.email.data and u_password == form.password.data:
+                return render_template("login.html", message = "Successfully Logged In", form = form) 
+        return render_template("login.html", message ="Incorrect Email or Password", form = form)       
+
+    elif form.errors:
+        print(form.errors.items())
+
     return render_template("login.html", form = form)
 
 if __name__ == "__main__":

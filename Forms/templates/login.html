@@ -12,9 +12,25 @@ Login Page
 <form action="{{url_for('login')}}" method="POST">
     {{ form.email.label }}: <br>
     {{ form.email }}
+    {% if form.email.errors %}
+    <br>
+        <ul>
+            {% for error in form.email.errors %}
+            <li id="error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <br>
     {{ form.password.label }}: <br>
     {{ form.password }}
+    {% if form.password.errors %}
+    <br>
+    <ul>
+        {% for error in form.password.errors%}
+        <li id="error"> {{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <br>
     {{ form.csrf_token }}
     {{ form.submit }}
