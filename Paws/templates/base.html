@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />  
 </head>
 <body>
-    <h1 id="title"> {% block heading %} {% endblock %} </h1>
+    <div>
+        <ul style="list-style-type: none;float: right;font-size: large;">
+            <li style="display:inline"><a href="{{url_for('homepage')}}">Home</a></li>
+            <li style="display:inline"><a href="{{url_for('about')}}">About</a></li>
+             {% if 'user' in session %}
+            <li style="display:inline"><a href="{{url_for('logout')}}">Log Out</a></li>
+            {% else %}
+            <li style="display:inline"><a href="{{url_for('login')}}">Login</a></li>
+            <li style="display:inline"><a href="{{url_for('signup')}}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <h1 id="title" style="text-align:left;"> {% block heading %} {% endblock %} </h1>
     <div id="content">
         {% block content %} {% endblock %}
     </div>
